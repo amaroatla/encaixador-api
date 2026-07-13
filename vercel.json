@@ -1,7 +1,5 @@
+e cole exatamente isto:
+
 {
-  "functions": {
-    "api/*.js": {
-      "runtime": "@vercel/node"
-    }
-  }
+  "version": 2
 }
