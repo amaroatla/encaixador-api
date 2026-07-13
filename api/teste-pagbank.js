@@ -1,25 +1,10 @@
-export default async function handler(req, res) {
-  const token = (process.env.PAGBANK_TOKEN || "").trim();
+export default function handler(req, res) {
+  const token = process.env.PAGBANK_TOKEN || "";
 
-  try {
-    const resposta = await fetch("https://api.pagseguro.com/orders", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json"
-      }
-    });
-
-    const texto = await resposta.text();
-
-    res.status(200).json({
-      tokenLength: token.length,
-      statusHTTP: resposta.status,
-      resposta: texto
-    });
-
-  } catch (e) {
-    res.status(500).json({
-      erro: e.message
-    });
-  }
+  res.json({
+    tamanho: token.length,
+    primeiroChar: token.charCodeAt(0),
+    ultimoChar: token.charCodeAt(token.length - 1),
+    token: JSON.stringify(token)
+  });
 }
